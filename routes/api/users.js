@@ -19,12 +19,10 @@ router.post(
   [
     check("name", "Name is required").not().isEmpty(),
     check("email", "Please include a valid email").isEmail(),
-    check(
-      "password",
-      "Please enter a password with 6 or mare characters"
-    ).isLength({ min: 6 }),
+    check("password","Please enter a password with 6 or mare characters").isLength({ min: 6 }),
   ],
   async (req, res) => {
+    // Checking for errors in the body
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -42,6 +40,7 @@ router.post(
           .status(400)
           .json({ errors: [{ msg: "User already exist" }] });
       }
+
       // Get users gravatar (based on email)
       const avatar = gravatar.url(email, {
         s: "200",
@@ -80,7 +79,8 @@ router.post(
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
-          res.json({ token }); // Send token back to the client
+          // Send token back to the client
+          res.json({ token });
         }
       );
     } catch (err) {
