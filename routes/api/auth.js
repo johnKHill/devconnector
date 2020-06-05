@@ -33,7 +33,7 @@ router.post(
   "/",
   [
     check("email", "Please include a valid email").isEmail(),
-    check("password","Password is required").exists(),
+    check("password", "Password is required").exists(),
   ],
   async (req, res) => {
     // Checking for errors in the body
@@ -52,7 +52,7 @@ router.post(
       if (!user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: "Invalid credentials" }] });
+          .json({ errors: [{ msg: "Invalid Credentials" }] });
       }
 
       // Make sure the passwords match - compare returns a promise
@@ -61,7 +61,7 @@ router.post(
       if (!isMatch) {
         return res
           .status(400)
-          .json({ errors: [{ msg: "Invalid credentials" }] });
+          .json({ errors: [{ msg: "Invalid Credentials" }] });
       }
 
       // Get the payload from the promise...the user id
