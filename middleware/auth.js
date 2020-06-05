@@ -1,8 +1,9 @@
 const jwt = require("jsonwebtoken");
 const config = require("config");
 
+// Verify the jsonwebtoken from the client - Authenticate users:
 // Middleware function has access to the request and response cycle/objects
-// And, the next param  means, once done, move on to the next piece of middleware
+// And, the next param means, once done, move on to the next piece of middleware
 
 module.exports = function(req, res, next) {
   // Getting a token, a header key
