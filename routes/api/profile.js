@@ -48,7 +48,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    // Destructuring/retrive everything from the req.body
+    // Destructuring/retrive data from the req.body
     const {
       company,
       location,
@@ -169,4 +169,64 @@ router.delete("/", auth, async (req, res) => {
   }
 });
 
+// @route    PUT api/profile/experience
+// @desc     Add profile experience
+// @access   Private
+router.put(
+  "/experience",
+  [
+    auth,
+    [
+      check("title", "Title is required").not().isEmpty(),
+
+      check("company", "Company is required").not().isEmpty(),
+
+      check("from", "From date required").not().isEmpty(),
+    ],
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    // Destructuring/retrive data from the req.body
+    const {
+      title,
+      company,
+      location,
+      from,
+      to,
+      current,
+      description,
+    } = req.body;
+
+    // This creates an object with the data the user submits
+    const newEXP = {
+      title,
+      company,
+      location,
+      from,
+      to,
+      current,
+      description,
+    };
+
+    try {
+      const profile = await Profile.findOne({ user: req.user.id });
+      // putting the new object with the data up front in the array
+      profile.experience.unshift(newEXP);
+
+      // Save and return the new profile
+      await profile.save();
+
+      // return entire profile
+      res.json(profile);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  }
+);
 module.exports = router;
