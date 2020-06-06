@@ -13,6 +13,7 @@ const User = require("../../models/User");
 // @desc     Get current users profile
 // @access   Private
 router.get("/me", auth, async (req, res) => {
+  // Look up user profile
   try {
     const profile = await Profile.findOne({
       user: req.user.id,
@@ -87,7 +88,7 @@ router.post(
     if (linkedin) profileFields.social.linkedin = linkedin;
     if (instagram) profileFields.social.instagram = instagram;
 
-    // Look for the profile by the user
+    // Look up user profile
     try {
       let profile = await Profile.findOne({ user: req.user.id });
       // if found
@@ -118,6 +119,7 @@ router.post(
 // @desc     Get all profiles
 // @access   Public
 router.get("/", async (req, res) => {
+  // Look up user profiles
   try {
     const profiles = await Profile.find().populate("user", ["name", "avatar"]);
     res.json(profiles);
@@ -131,7 +133,7 @@ router.get("/", async (req, res) => {
 // @desc     Get profile by user ID
 // @access   Public
 router.get("/user/:user_id", async (req, res) => {
-  // Look up one profile
+  // Look up user profile
   try {
     const profile = await Profile.findOne({
       user: req.params.user_id,
@@ -212,7 +214,7 @@ router.put(
       current,
       description,
     };
-
+    // Look up user profile
     try {
       const profile = await Profile.findOne({ user: req.user.id });
       // putting the new object with the data up front in the array
@@ -229,4 +231,31 @@ router.put(
     }
   }
 );
+
+// @route    DELETE api/profile/experience/:exp_id
+// @desc     Delete experience from profile
+// @access   Private
+router.delete("/experience/:exp_id", auth, async (req, res) => {
+  // Look up user profile
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+
+    // Get the remove index - to get the correct experience
+    const removeIndex = profile.experience
+      .map((item) => item.id)
+      .indexOf(req.params.exp_id);
+
+    // Splice/take out 1 experience by it's exp.id
+    profile.experience.splice(removeIndex, 1);
+
+    // Save and return the profile
+    await profile.save();
+
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;
