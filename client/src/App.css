@@ -1,10 +1,11 @@
 /* Global Styles */
 :root {
-  --primary-color: #17a2b8;
+  --primary-color: #3f194e;
   --dark-color: #343a40;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
   --success-color: #28a745;
+  --hov-color: #b5abb6;
 }
 
 * {
@@ -309,6 +310,7 @@ button {
   width: 100%;
   top: 0;
   border-bottom: solid 1px var(--primary-color);
+  background-color: var(--primary-color);
   opacity: 0.9;
 }
 
@@ -323,7 +325,7 @@ button {
 }
 
 .navbar a:hover {
-  color: var(--primary-color);
+  color: var(--hov-color);
 }
 
 .navbar .welcome span {
@@ -390,7 +392,7 @@ button {
 }
 
 .profile-top .icons a:hover {
-  color: var(--dark-color);
+  color: var(--hov-color);
 }
 
 .profile-about {
