@@ -1,7 +1,10 @@
 import React, { Fragment, useState } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { setAlert } from "../../actions/alert";
+import PropTypes from "prop-types";
 
-const Register = () => {
+const Register = ({ setAlert }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,7 +20,9 @@ const Register = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
-      console.log("Passwords do not match");
+      // Call to the alert Action Type but
+      // send msg and alertType to dispatch the payload
+      setAlert("Passwords do not match", "danger");
     } else {
       console.log("SUCCESS");
     }
@@ -85,4 +90,13 @@ const Register = () => {
   );
 };
 
-export default Register;
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+};
+
+// Connect this component to Redux with
+// an object holding any action to use/export
+// allows the export access/availability to props
+// called in the components params - props.setAlert
+// destructured to an object instead of using props = { setAlert }
+export default connect(null, { setAlert })(Register);
