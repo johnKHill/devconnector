@@ -98,5 +98,5 @@ Register.propTypes = {
 // an object holding any action to use/export
 // allows the export access/availability to props
 // called in the components params - props.setAlert
-// destructured to an object instead of using props = { setAlert }
+// de-structure to an object instead of using props = { setAlert }
 export default connect(null, { setAlert })(Register);
