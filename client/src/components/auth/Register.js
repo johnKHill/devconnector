@@ -2,9 +2,10 @@ import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { setAlert } from "../../actions/alert";
+import { register } from "../../actions/auth";
 import PropTypes from "prop-types";
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, register }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,11 +21,14 @@ const Register = ({ setAlert }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== password2) {
-      // Call to the alert Action Type but
+      // Call to the alert action Type but
       // send msg and alertType to dispatch the payload
       setAlert("Passwords do not match", "danger");
     } else {
-      console.log("SUCCESS");
+      // Call to the register action Type
+      // register the data de-constructed from
+      // the component state, the formData
+      register({ name, email, password });
     }
   };
 
@@ -92,6 +96,7 @@ const Register = ({ setAlert }) => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
 };
 
 // Connect this component to Redux with
@@ -99,4 +104,4 @@ Register.propTypes = {
 // allows the export access/availability to props
 // called in the components params - props.setAlert
 // de-structure to an object instead of using props = { setAlert }
-export default connect(null, { setAlert })(Register);
+export default connect(null, { setAlert, register })(Register);
