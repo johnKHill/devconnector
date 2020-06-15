@@ -7,9 +7,11 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  LOGOUT,
 } from "./types";
-import setAuthToken from "../utils/setAuthToken";
 
+import setAuthToken from "../utils/setAuthToken";
+//--------------------------------------------------------
 // Load User
 export const loadUser = () => async (dispatch) => {
   // check localStorage
@@ -96,4 +98,9 @@ export const login = (email, password) => async (dispatch) => {
     // If not, then dispatch fail
     dispatch({ type: LOGIN_FAIL });
   }
+};
+
+// Logout User
+export const logout = () => (dispatch) => {
+  dispatch({ type: LOGOUT });
 };
