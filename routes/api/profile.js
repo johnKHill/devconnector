@@ -12,6 +12,7 @@ const { check, validationResult } = require("express-validator");
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
 
+// 1.-----------------------------------------------------------------
 // @route    GET api/profile/me
 // @desc     Get current users profile
 // @access   Private
@@ -33,10 +34,10 @@ router.get("/me", auth, async (req, res) => {
   }
 });
 
+// 2.-----------------------------------------------------------------
 // @route    POST api/profile
 // @desc     Create or update a user profile
 // @access   Private
-
 router.post(
   "/",
   [
@@ -118,6 +119,7 @@ router.post(
   }
 );
 
+// 3.-----------------------------------------------------------------
 // @route    GET api/profile
 // @desc     Get all profiles
 // @access   Public
@@ -132,6 +134,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// 4.-----------------------------------------------------------------
 // @route    GET api/profile/user/:user_id
 // @desc     Get profile by user ID
 // @access   Public
@@ -155,6 +158,7 @@ router.get("/user/:user_id", async (req, res) => {
   }
 });
 
+// 5.-----------------------------------------------------------------
 // @route    DELETE api/profile
 // @desc     Delete profile, user, and posts
 // @access   Private
@@ -172,6 +176,7 @@ router.delete("/", auth, async (req, res) => {
   }
 });
 
+// 6.-----------------------------------------------------------------
 // @route    PUT api/profile/experience
 // @desc     Add profile experience
 // @access   Private
@@ -233,6 +238,7 @@ router.put(
   }
 );
 
+// 7.-----------------------------------------------------------------
 // @route    DELETE api/profile/experience/:exp_id
 // @desc     Delete experience from profile
 // @access   Private
@@ -259,7 +265,7 @@ router.delete("/experience/:exp_id", auth, async (req, res) => {
   }
 });
 
-// -----------------------------------------------------------------
+// 8.-----------------------------------------------------------------
 // @route    PUT api/profile/education
 // @desc     Add profile education
 // @access   Private
@@ -323,6 +329,7 @@ router.put(
   }
 );
 
+// 9.-----------------------------------------------------------------
 // @route    DELETE api/profile/education/:edu_id
 // @desc     Delete education from profile
 // @access   Private
@@ -349,6 +356,7 @@ router.delete("/education/:edu_id", auth, async (req, res) => {
   }
 });
 
+// 10.-----------------------------------------------------------------
 // @route    GET api/profile/github/:username
 // @desc     Get user repos from github
 // @access   Public
@@ -370,4 +378,5 @@ router.get("/github/:username", async (req, res) => {
     return res.status(404).send({ msg: "No Github profile found" });
   }
 });
+
 module.exports = router;
