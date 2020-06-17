@@ -244,7 +244,7 @@ const EditProfile = ({
     </Fragment>
   );
 };
-//Todo: start back at 11:06
+
 EditProfile.propTypes = {
   createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
