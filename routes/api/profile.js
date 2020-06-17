@@ -52,7 +52,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    // Destructuring/retrive data from the req.body
+    // Destructuring/retrieve data from the req.body
     const {
       company,
       location,
