@@ -13,15 +13,9 @@ const { check, validationResult } = require("express-validator");
 // @route    POST api/posts
 // @desc     Create a post
 // @access   Private
-router.post("/",
-  [
-    auth,
-    [
-      check("text", "Text is required")
-      .not()
-      .isEmpty()
-    ]
-  ],
+router.post(
+  "/",
+  [auth, [check("text", "Text is required").not().isEmpty()]],
   async (req, res) => {
     // Checking for errors in the body
     const errors = validationResult(req);
@@ -156,7 +150,7 @@ router.put("/like/:id", auth, async (req, res) => {
 });
 
 // @route    PUT api/posts/unlike/:id
-// @desc     Unike a post
+// @desc     Unlike a post
 // @access   Private
 router.put("/unlike/:id", auth, async (req, res) => {
   try {
@@ -193,15 +187,9 @@ router.put("/unlike/:id", auth, async (req, res) => {
 // @route    POST api/posts/comment/:id
 // @desc     Comment on a post
 // @access   Private
-router.post("/comment/:id",
-  [
-    auth,
-    [
-      check("text", "Text is required")
-      .not()
-      .isEmpty()
-    ]
-  ],
+router.post(
+  "/comment/:id",
+  [auth, [check("text", "Text is required").not().isEmpty()]],
   async (req, res) => {
     // Checking for errors in the body
     const errors = validationResult(req);
