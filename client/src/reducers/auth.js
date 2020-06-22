@@ -6,11 +6,11 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  ACCOUNT_DELETED
+  ACCOUNT_DELETED,
 } from "../actions/types";
 
 const initialState = {
-  // Get the token if it;s there from localStorage
+  // Get the token if it's there from localStorage
   token: localStorage.getItem("token"),
   isAuthenticated: null,
   loading: true,

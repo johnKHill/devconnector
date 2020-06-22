@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Route, Switch } from "react-router-dom";
 
 import Register from "../auth/Register";
@@ -38,7 +37,5 @@ const Routes = () => {
     </section>
   );
 };
-
-Routes.propTypes = {};
 
 export default Routes;

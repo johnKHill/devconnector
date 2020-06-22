@@ -12,7 +12,7 @@ import {
 } from "./types";
 
 import setAuthToken from "../utils/setAuthToken";
-//--------------------------------------------------------
+
 // Load User
 export const loadUser = () => async (dispatch) => {
   // check localStorage
